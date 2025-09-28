@@ -6,6 +6,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 32px;
+    padding: 0px 32px 32px;
   }
+}
+mat-form-field.small {
+  --mat-form-field-container-height: 40px;
+  --mat-form-field-container-vertical-padding: 8px;
 }

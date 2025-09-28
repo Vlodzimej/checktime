@@ -1,16 +1,17 @@
 <div class="header">
-    <h2>Новая подзадача</h2>
+    <h4>Новая подзадача</h4>
 </div>
+
 <div class="content">
     <form [formGroup]="taskCreationForm">
-        <mat-form-field>
+        <mat-form-field class="small" appearance="outline">
             <mat-label>Название</mat-label>
-            <input formControlName="name" nameField="name" matInput placeholder="Введите название подзадачи" />
+            <input formControlName="title" nameField="title" matInput placeholder="Введите название подзадачи" />
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="small" appearance="outline">
             <mat-label>Время выполнения</mat-label>
             <input formControlName="duration" nameField="duration" matInput placeholder="Укажите время выполнения" />
         </mat-form-field>
-        <button matButton (click)="confirm()">Создать</button>
+        <button matButton (click)="confirm()" [disabled]="!taskCreationForm.valid">Создать</button>
     </form>
 </div>

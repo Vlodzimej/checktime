@@ -1,7 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, model, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -9,11 +8,9 @@ import {
 } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {
-  MatFormField,
   MatFormFieldModule,
-  MatLabel,
 } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -38,24 +35,30 @@ export interface TaskItemCreationData {
     MatInputModule,
     MatSelectModule,
     MatIconModule,
-    MatButtonModule,
+    MatButtonModule
   ],
 })
 export class TaskItemCreationComponent implements OnInit {
 
   readonly data = inject<TaskItemCreationData>(MAT_DIALOG_DATA);
-  readonly formBuilder = inject(FormBuilder);
+  readonly model = model<TaskItemCreationData>(this.data)
 
+  readonly formBuilder = inject(FormBuilder);
+  readonly dialogRef = inject(MatDialogRef<TaskItemCreationComponent>);
+  
   taskCreationForm!: FormGroup;
 
   ngOnInit(): void {
     this.taskCreationForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      duration: [0, Validators.required],
+      title: ['', Validators.required],
+      duration: ['', Validators.required],
     });
   }
 
   confirm() {
-    
+    this.dialogRef.close({
+      title: this.taskCreationForm.controls['title'].value,
+      duration: this.taskCreationForm.controls['duration'].value
+    })
   }
 }

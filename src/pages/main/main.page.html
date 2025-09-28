@@ -1,5 +1,8 @@
 <app-task-item-table [dataSource]="items()" class="content__table"></app-task-item-table>
 <section>
-    <button matButton="elevated" (click)="handleAddButtonClick()">Добавить</button>
+    <mat-divider></mat-divider>
+    <span>Итоговое время: {{ summary() }}</span>
 </section>
+<button matButton="elevated" (click)="handleAddButtonClick()">Добавить</button>
+
 
